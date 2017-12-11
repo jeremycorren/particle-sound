@@ -9,9 +9,10 @@ const TYPE = {
 }
 
 const atomTheme = [
-	'rgb(2, 84, 125', 
-	'rgb(2, 132, 168', 
-	'rgb(2, 190, 196'
+	'rgb(10, 130, 220'
+	//'rgb(2, 84, 125' 
+	// 'rgb(2, 132, 168', 
+	// 'rgb(2, 190, 196'
 ];
 
 const shadowTheme = [
@@ -27,10 +28,17 @@ const specterTheme = [
 	'rgb(214, 227, 242'
 ]
 
+let ripples = [];
+
+const collisionColor = 235;
+const idToColor = new Map();
+
 const mouseArea = 70;
 const growRadius = 50;
 const shrinkRadius = 30;
 const resizeVelocity = 2;
+
+const pitches = getPitches();
 
 class Unit {
 	constructor(x, y, r, velocity, opacity, theme) {
@@ -84,20 +92,52 @@ class Shadow extends Unit {
 		this.x += this.velocity.x;
 		this.y += this.velocity.y;
 
-		if (mouseInRange(mouse, mouseArea, this, growRadius)) {
-			this.r += resizeVelocity;
-		} else if (this.r > shrinkRadius) {
-			this.r -= resizeVelocity;
-		}
+		// if (mouseInRange(mouse, mouseArea, this, growRadius)) {
+		// 	this.r += resizeVelocity;
+		// } else if (this.r > shrinkRadius) {
+		// 	this.r -= resizeVelocity;
+		// }
 
 		this.draw();
 	}
 }
 
+function makeRipple(x, y, r) {
+	ripples.push(new Ripple(x, y, r));
+}
+
 class Atom extends Unit {
-	constructor(x, y, r, velocity, opacity, theme) {
+	constructor(x, y, r, velocity, opacity, theme, id) {
 		super(x, y, r, velocity, opacity, theme);
 		this.mass = 1;
+		this.id = id;
+		
+		// this.env = new Tone.AmplitudeEnvelope({
+		// 	"attack": 0.1,
+		// 	"decay": 0.5,
+		// 	"sustain": 1.0,
+		// 	"release": 0.1
+		// }).toMaster();
+		// this.osc = new Tone.OmniOscillator().connect(this.env);
+		this.synth = new Tone.Synth().toMaster();
+	}
+
+	draw() {
+		ctx.beginPath();
+		ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2, false);
+
+		if (idToColor.has(this.id)) {
+			let rVal = valueOf(idToColor.get(this.id));
+
+			if (rVal > 10) {
+				rVal -= 1;
+			}
+			ctx.fillStyle = stringOf(rVal);
+			idToColor.set(this.id, stringOf(rVal));
+		} else {
+			ctx.fillStyle = this.color;
+		}
+		ctx.fill();
 	}
 
 	update(units) {
@@ -105,6 +145,14 @@ class Atom extends Unit {
 			if (this === units[i]) {
 				continue;
 			} else if (hasCollided(this, units[i])) {
+				idToColor.set(this.id, stringOf(collisionColor));
+	
+				// this.osc.frequency.value = pitches[randomFrom(pitches)];
+				// this.osc.start();
+				// this.env.triggerAttackRelease();
+				this.synth.triggerAttackRelease(pitches[randomFrom(pitches)], 1);
+
+				makeRipple(this.x, this.y, this.r);
 				resolveCollision(this, units[i]);
 			}
 		}
@@ -124,7 +172,30 @@ class Atom extends Unit {
 	}
 }
 
-class UnitsBuilder {
+class Ripple { // collapse into Unit inheritance somehow... only draw() / update() are diff
+	constructor(x, y, r) {
+		this.x = x;
+		this.y = y;
+		this.r = r;
+		this.color = 'rgb(0, 0, 0, ';
+		this.opacity = 0.5;
+	}
+
+	draw() {
+		ctx.beginPath();
+		ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2, false);
+		ctx.strokeStyle = this.color + this.opacity + ')';
+		ctx.stroke();
+	}
+
+	update() {
+		this.r += 1;
+		this.opacity -= 0.005;
+		this.draw();
+	}
+}
+
+class UnitBuilder {
 	constructor(type) {
 		this.type = type;
 	}

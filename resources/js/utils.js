@@ -2,6 +2,50 @@
  * Utils
  */
 
+function makeUnits(unit) {
+	units = []
+	for (let i = 0; i < unit.density; i++) {
+		let r = randomBetween(unit.minRadius, unit.maxRadius);
+		let rSquared = r * 2;
+		let x = randomBetween(canvas.width, rSquared);
+		let y = randomBetween(canvas.height, rSquared)
+		
+		if (i > 0) {
+			for (let j = 0; j < units.length; j++) {
+				if (distanceBetween(x, y, units[j].x, units[j].y) - rSquared < 0) {
+					x = randomBetween(canvas.width, rSquared);
+					y = randomBetween(canvas.height, rSquared);
+
+					j = -1;
+				}
+			}
+		}
+
+		if (unit.type === TYPE.ATOM) {
+			units.push(new Atom(x, y, r, unit.velocity, unit.opacity, unit.theme, i));
+		} else if (unit.type === TYPE.SHADOW) {
+			units.push(new Shadow(x, y, r, unit.velocity, unit.opacity, unit.theme));
+		} else if (unit.type === TYPE.SPECTER) {
+			units.push(new Unit(x, y, r, unit.velocity, unit.opacity, unit.theme));
+		}
+	}
+	return units;
+}
+
+function getPitches() {
+	const pitchClasses = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
+	
+	let pitches = [];
+	for (let i = 3; i <= 5; i++) {
+		pitchClasses.forEach(pitchClass => pitches.push(pitchClass + i));
+	}
+	return pitches;
+}
+
+function makeRipple(x, y, r) {
+	ripples.push(new Ripple(x, y, r));
+}
+
 function randomDelta(factor) {
 	return (Math.random() - 0.5) * factor;
 }
@@ -10,12 +54,20 @@ function randomBetween(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }
 
-function randomFrom(length) {
-	return Math.floor(Math.random() * length);
+function randomFrom(array) {
+	return Math.floor(Math.random() * array.length);
 }
 
 function randomColor(colors, opacity) {
 	return colors[Math.floor(Math.random() * colors.length)] + ', ' + opacity + ')';
+}
+
+function stringOf(val) {
+	return 'rgb(' + val + ' , 130, 220, 0.5';
+}
+
+function valueOf(string) {
+	return parseInt(string.slice(4, 7));
 }
 
 function touchesBorder(axis, r, measure) {
@@ -77,34 +129,4 @@ function rotate(velocity, angle) {
         x: velocity.x * Math.cos(angle) - velocity.y * Math.sin(angle),
         y: velocity.x * Math.sin(angle) + velocity.y * Math.cos(angle)
     };
-}
-
-function makeUnits(unit) {
-	units = []
-	for (let i = 0; i < unit.density; i++) {
-		let r = randomBetween(unit.minRadius, unit.maxRadius);
-		let rSquared = r * 2;
-		let x = randomBetween(canvas.width, rSquared);
-		let y = randomBetween(canvas.height, rSquared)
-		
-		if (i > 0) {
-			for (let j = 0; j < units.length; j++) {
-				if (distanceBetween(x, y, units[j].x, units[j].y) - rSquared < 0) {
-					x = randomBetween(canvas.width, rSquared);
-					y = randomBetween(canvas.height, rSquared);
-
-					j = -1;
-				}
-			}
-		}
-
-		if (unit.type === TYPE.ATOM) {
-			units.push(new Atom(x, y, r, unit.velocity, unit.opacity, unit.theme));
-		} else if (unit.type === TYPE.SHADOW) {
-			units.push(new Shadow(x, y, r, unit.velocity, unit.opacity, unit.theme));
-		} else if (unit.type === TYPE.SPECTER) {
-			units.push(new Unit(x, y, r, unit.velocity, unit.opacity, unit.theme));
-		}
-	}
-	return units;
 }

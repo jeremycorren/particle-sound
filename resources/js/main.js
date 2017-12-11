@@ -17,24 +17,24 @@ window.addEventListener('mousemove', function(event) {
 
 let atoms, shadows, specters;
 function init() {
-	atoms = makeUnits(new UnitsBuilder(TYPE.ATOM)
+	atoms = makeUnits(new UnitBuilder(TYPE.ATOM)
 		.density(10)
 		.minRadius(10)
 		.maxRadius(17)
-		.velocity(4)
+		.velocity(3)
 		.opacity(0.5)
 		.theme(atomTheme));
 
-	shadows = makeUnits(new UnitsBuilder(TYPE.SHADOW)
-		.density(10)
+	shadows = makeUnits(new UnitBuilder(TYPE.SHADOW)
+		.density(15)
 		.minRadius(25)
 		.maxRadius(35)
 		.velocity(1.5)
 		.opacity(0.15)
 		.theme(shadowTheme));
 
-	specters = makeUnits(new UnitsBuilder(TYPE.SPECTER)
-		.density(10)
+	specters = makeUnits(new UnitBuilder(TYPE.SPECTER)
+		.density(5)
 		.minRadius(60)
 		.maxRadius(100)
 		.velocity(0.5)
@@ -46,16 +46,13 @@ function animate() {
 	requestAnimationFrame(animate);
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-	atoms.forEach(atom => {
-		atom.update(atoms);
-	});
-
-	shadows.forEach(shadow => {
-		shadow.update(shadows);
-	});
-
-	specters.forEach(specter => {
-		specter.update(specters);
+	for (let i = 0; i < atoms.length; i++) {
+		atoms[i].update(atoms);
+	}
+	shadows.forEach(shadow => shadow.update());
+	specters.forEach(specter => specter.update());
+	ripples.forEach(ripple => {
+		ripple.update();
 	});
 }
 
