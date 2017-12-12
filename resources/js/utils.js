@@ -33,17 +33,13 @@ function makeUnits(unit) {
 }
 
 function getPitches() {
-	const pitchClasses = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
+	const pitchClasses = ['A', 'B', 'C#', 'D', 'E', 'F#', 'G#'];
 	
 	let pitches = [];
 	for (let i = 3; i <= 5; i++) {
 		pitchClasses.forEach(pitchClass => pitches.push(pitchClass + i));
 	}
 	return pitches;
-}
-
-function makeRipple(x, y, r) {
-	ripples.push(new Ripple(x, y, r));
 }
 
 function randomDelta(factor) {
@@ -63,7 +59,7 @@ function randomColor(colors, opacity) {
 }
 
 function stringOf(val) {
-	return 'rgb(' + val + ' , 130, 220, 0.5';
+	return 'rgb(' + val + ' , 130, 220, 0.7';
 }
 
 function valueOf(string) {

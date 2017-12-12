@@ -10,9 +10,6 @@ const TYPE = {
 
 const atomTheme = [
 	'rgb(10, 130, 220'
-	//'rgb(2, 84, 125' 
-	// 'rgb(2, 132, 168', 
-	// 'rgb(2, 190, 196'
 ];
 
 const shadowTheme = [
@@ -104,6 +101,9 @@ class Shadow extends Unit {
 
 function makeRipple(x, y, r) {
 	ripples.push(new Ripple(x, y, r));
+	if (ripples.length > 15) {
+		ripples.shift();
+	}
 }
 
 class Atom extends Unit {
@@ -111,15 +111,14 @@ class Atom extends Unit {
 		super(x, y, r, velocity, opacity, theme);
 		this.mass = 1;
 		this.id = id;
-		
-		// this.env = new Tone.AmplitudeEnvelope({
-		// 	"attack": 0.1,
-		// 	"decay": 0.5,
-		// 	"sustain": 1.0,
-		// 	"release": 0.1
-		// }).toMaster();
-		// this.osc = new Tone.OmniOscillator().connect(this.env);
-		this.synth = new Tone.Synth().toMaster();
+		this.volume = new Tone.Volume(-20);
+		this.env = new Tone.AmplitudeEnvelope({
+			"attack": 0.01,
+			"decay": 0.3,
+			"sustain": 1,
+			"release": 10
+		}).chain(this.volume, Tone.Master);
+		this.osc = new Tone.OmniOscillator().connect(this.env);
 	}
 
 	draw() {
@@ -147,10 +146,9 @@ class Atom extends Unit {
 			} else if (hasCollided(this, units[i])) {
 				idToColor.set(this.id, stringOf(collisionColor));
 	
-				// this.osc.frequency.value = pitches[randomFrom(pitches)];
-				// this.osc.start();
-				// this.env.triggerAttackRelease();
-				this.synth.triggerAttackRelease(pitches[randomFrom(pitches)], 1);
+				this.osc.frequency.value = pitches[randomFrom(pitches)];
+				this.osc.start();
+				this.env.triggerAttackRelease(0.8);
 
 				makeRipple(this.x, this.y, this.r);
 				resolveCollision(this, units[i]);
@@ -172,13 +170,13 @@ class Atom extends Unit {
 	}
 }
 
-class Ripple { // collapse into Unit inheritance somehow... only draw() / update() are diff
+class Ripple {
 	constructor(x, y, r) {
 		this.x = x;
 		this.y = y;
 		this.r = r;
-		this.color = 'rgb(0, 0, 0, ';
-		this.opacity = 0.5;
+		this.color = 'rgb(255, 255, 255, ';
+		this.opacity = 0.7;
 	}
 
 	draw() {

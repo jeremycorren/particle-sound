@@ -1,1 +1,12 @@
-canvas { }
+html, body {
+	background-color: #021a42;
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	overflow: hidden;
+}
+
+canvas {
+	display: inline;
+	background-color: #021a42;
+}
