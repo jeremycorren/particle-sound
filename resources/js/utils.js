@@ -66,6 +66,24 @@ function valueOf(string) {
 	return parseInt(string.slice(4, 7));
 }
 
+let backgroundColors = [
+	'black',
+	'#b9c2e8',
+	'#492d51',
+	'#021a42',
+]
+
+let i = 0;
+function changeBackdrop() {
+	canvas.style.backgroundColor = backgroundColors[i];
+	document.body.style.backgroundColor = backgroundColors[i];
+	
+	i += 1;
+	if (i === backgroundColors.length) {
+		i = 0;
+	}
+}
+
 function touchesBorder(axis, r, measure) {
 	return axis + r > measure || axis - r < 0;
 }

@@ -4,9 +4,52 @@ html, body {
 	height: 100%;
 	margin: 0px;
 	overflow: hidden;
+	transition: background-color 10s ease;
 }
 
 canvas {
 	display: inline;
 	background-color: #021a42;
+    transition: background-color 10s ease;
+	animation: fadein 10s;
+}
+
+#top-bar {
+	background-color: #1b2e4f;
+	padding: 5px;
+	text-align: center;
+	animation: fadein 10s;
+}
+
+#top-bar font {
+	color: white;
+	font-family: "Tahoma";
+	-moz-osx-font-smoothing: grayscale;
+}
+
+#backdrop-button {
+	position:absolute;
+   	top: 4px;
+   	right: 4px;
+	border-radius: 3px;
+	cursor: pointer;
+  	padding: 3px;
+  	color: #e6e6e6;
+  	background-color: #002b60;
+  	font-size: 15px;
+  	font-family: "Tahoma";
+  	-moz-osx-font-smoothing: grayscale;
+  	border: 0.5px solid #bcd0d1;
+  	transition-duration: 0.5s;
+  	animation: fadein 10s;
+}
+
+#backdrop-button:hover {
+	background-color: #1f64b7;
+}
+
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }

@@ -113,7 +113,7 @@ class Atom extends Unit {
 		this.id = id;
 		this.volume = new Tone.Volume(-20);
 		this.env = new Tone.AmplitudeEnvelope({
-			"attack": 0.01,
+			"attack": 0.05,
 			"decay": 0.3,
 			"sustain": 1,
 			"release": 10

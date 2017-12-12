@@ -2,14 +2,26 @@
 <html>
     <head>
         <meta charset=utf-8>
-        <title>particle-sound</title>
+        <title>quarium</title>
         <link rel="stylesheet" type="text/css" href="resources/css/style.css">
         <script src="vendors/Tone.min.js"></script>
-    </head>
-    <body>
-        <canvas id="canvas"></canvas>
         <script src="resources/js/utils.js"></script>
         <script src="resources/js/model.js"></script>
+    </head>
+    <body>
+        <table>
+            <tr>
+                <td id="top-bar">
+                    <font>quarium</font>
+                </td>
+                <td>
+                    <button id="backdrop-button" onClick="changeBackdrop()">pass time</button>
+                </td>
+            </tr>
+            <tr>
+                <td><canvas id="canvas"></canvas></td>
+            </tr>
+        </table>
         <script src="resources/js/main.js"></script>
     </body>
 </html>

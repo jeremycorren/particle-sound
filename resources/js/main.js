@@ -3,9 +3,10 @@
  */
 
 let canvas = document.getElementById('canvas');
+let topBar = document.getElementById('top-bar');
 let ctx = canvas.getContext("2d");
 ctx.canvas.width = window.innerWidth;
-ctx.canvas.height = window.innerHeight;
+ctx.canvas.height = window.innerHeight - topBar.offsetHeight;
 
 let mouse = {
 	x: undefined, 
@@ -21,12 +22,12 @@ let atoms, shadows, specters;
 function init() {
 	let atomDensity, shadowDensity, specterDensity;
 	if (ctx.canvas.width < 1300 && ctx.canvas.height < 700) {
-		atomDensity = 25;
-		shadowDensity = 20;
-		specterDensity = 8;
+		atomDensity = 20;
+		shadowDensity = 15;
+		specterDensity = 7;
 	} else {
-		atomDensity = 50;
-		shadowDensity = 35;
+		atomDensity = 35;
+		shadowDensity = 25;
 		specterDensity = 10;
 	}
 
