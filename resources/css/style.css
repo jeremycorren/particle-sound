@@ -4,27 +4,45 @@ html, body {
 	height: 100%;
 	margin: 0px;
 	overflow: hidden;
-	transition: background-color 10s ease;
+
+	-webkit-animation: fadein 5s;
+  	   -moz-animation: fadein 5s;
+	        animation: fadein 5s;
+
+	-webkit-transition: background-color 10s ease;
+	   -moz-transition: background-color 10s ease;
+		    transition: background-color 10s ease;
 }
 
 canvas {
 	display: inline;
 	background-color: #021a42;
-    transition: background-color 10s ease;
-	animation: fadein 10s;
+
+	-webkit-animation: fadein 5s;
+  	   -moz-animation: fadein 5s;
+	        animation: fadein 5s;
+
+    -webkit-transition: background-color 10s ease;
+	   -moz-transition: background-color 10s ease;
+		    transition: background-color 10s ease;
 }
 
 #top-bar {
 	background-color: #1b2e4f;
 	padding: 5px;
 	text-align: center;
-	animation: fadein 10s;
+
+	-webkit-animation: fadein 5s;
+  	   -moz-animation: fadein 5s;
+	        animation: fadein 5s;
 }
 
 #top-bar font {
 	color: white;
 	font-family: "Tahoma";
+
 	-moz-osx-font-smoothing: grayscale;
+	 -webkit-font-smoothing: antialiased;
 }
 
 #backdrop-button {
@@ -36,18 +54,37 @@ canvas {
   	padding: 3px;
   	color: #e6e6e6;
   	background-color: #002b60;
+  	border: 0.5px solid #bcd0d1;
   	font-size: 15px;
   	font-family: "Tahoma";
+
   	-moz-osx-font-smoothing: grayscale;
-  	border: 0.5px solid #bcd0d1;
-  	transition-duration: 0.5s;
-  	animation: fadein 10s;
+  	 -webkit-font-smoothing: antialiased;
+  	
+  	-webkit-animation: fadein 10s;
+  	   -moz-animation: fadein 10s;
+  	        animation: fadein 10s;
+
+  	-webkit-transition-duration: 0.5s;
+  	   -moz-transition-duration: 0.5s;
+  	        transition-duration: 0.5s;
 }
 
 #backdrop-button:hover {
 	background-color: #1f64b7;
 }
 
+
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
 
 @keyframes fadein {
     from { opacity: 0; }

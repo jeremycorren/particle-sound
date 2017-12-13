@@ -59,7 +59,7 @@ function randomColor(colors, opacity) {
 }
 
 function stringOf(val) {
-	return 'rgb(' + val + ' , 130, 220, 0.7';
+	return 'rgba(' + val + ' , 130, 220, 0.7';
 }
 
 function valueOf(string) {

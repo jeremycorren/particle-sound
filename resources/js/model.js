@@ -9,20 +9,20 @@ const TYPE = {
 }
 
 const atomTheme = [
-	'rgb(10, 130, 220'
+	'rgba(10, 130, 220'
 ];
 
 const shadowTheme = [
-	'rgb(96, 54, 128',
-	'rgb(129, 86, 232',
-	'rgb(108, 108, 255',
-	'rgb(86, 122, 232'
+	'rgba(96, 54, 128',
+	'rgba(129, 86, 232',
+	'rgba(108, 108, 255',
+	'rgba(86, 122, 232'
 ]
 
 const specterTheme = [
-	'rgb(26, 31, 62',
-	'rgb(69, 105, 142',
-	'rgb(214, 227, 242'
+	'rgba(26, 31, 62',
+	'rgba(69, 105, 142',
+	'rgba(214, 227, 242'
 ]
 
 let ripples = [];
@@ -175,7 +175,7 @@ class Ripple {
 		this.x = x;
 		this.y = y;
 		this.r = r;
-		this.color = 'rgb(255, 255, 255, ';
+		this.color = 'rgba(255, 255, 255, ';
 		this.opacity = 0.7;
 	}
 
