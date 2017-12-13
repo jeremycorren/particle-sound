@@ -23,9 +23,7 @@ function makeUnits(unit) {
 
 		if (unit.type === TYPE.ATOM) {
 			units.push(new Atom(x, y, r, unit.velocity, unit.opacity, unit.theme, i));
-		} else if (unit.type === TYPE.SHADOW) {
-			units.push(new Shadow(x, y, r, unit.velocity, unit.opacity, unit.theme));
-		} else if (unit.type === TYPE.SPECTER) {
+		} else if (unit.type === TYPE.UNIT) {
 			units.push(new Unit(x, y, r, unit.velocity, unit.opacity, unit.theme));
 		}
 	}
@@ -59,11 +57,14 @@ function randomColor(colors, opacity) {
 }
 
 function stringOf(val) {
-	return 'rgba(' + val + ' , 130, 220, 0.7';
+	return 'rgba(' + val + ', 130, 220, 0.7)';
 }
 
 function valueOf(string) {
-	return parseInt(string.slice(4, 7));
+	if (string.length === 22) {
+		return parseInt(string.slice(5, 7));
+	}
+	return parseInt(string.slice(5, 8));
 }
 
 let backgroundColors = [
@@ -86,12 +87,6 @@ function changeBackdrop() {
 
 function touchesBorder(axis, r, measure) {
 	return axis + r > measure || axis - r < 0;
-}
-
-function mouseInRange(mouse, mouseArea, unit, growRadius) {
-	return mouse.x - unit.x < mouseArea && mouse.x - unit.x > -mouseArea
-		&& mouse.y - unit.y < mouseArea && mouse.y - unit.y > -mouseArea
-		&& unit.r < growRadius;
 }
 
 function hasCollided(unit1, unit2) {

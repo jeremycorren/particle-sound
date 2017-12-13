@@ -5,9 +5,9 @@ html, body {
 	margin: 0px;
 	overflow: hidden;
 
-	-webkit-animation: fadein 5s;
-  	   -moz-animation: fadein 5s;
-	        animation: fadein 5s;
+	-webkit-animation: fadein 2s;
+  	   -moz-animation: fadein 2s;
+	        animation: fadein 2s;
 
 	-webkit-transition: background-color 10s ease;
 	   -moz-transition: background-color 10s ease;
@@ -18,9 +18,9 @@ canvas {
 	display: inline;
 	background-color: #021a42;
 
-	-webkit-animation: fadein 5s;
-  	   -moz-animation: fadein 5s;
-	        animation: fadein 5s;
+	-webkit-animation: fadein 2s;
+  	   -moz-animation: fadein 2s;
+	        animation: fadein 2s;
 
     -webkit-transition: background-color 10s ease;
 	   -moz-transition: background-color 10s ease;
@@ -32,9 +32,9 @@ canvas {
 	padding: 5px;
 	text-align: center;
 
-	-webkit-animation: fadein 5s;
-  	   -moz-animation: fadein 5s;
-	        animation: fadein 5s;
+	-webkit-animation: fadein 2s;
+  	   -moz-animation: fadein 2s;
+	        animation: fadein 2s;
 }
 
 #top-bar font {
@@ -60,14 +60,10 @@ canvas {
 
   	-moz-osx-font-smoothing: grayscale;
   	 -webkit-font-smoothing: antialiased;
-  	
-  	-webkit-animation: fadein 10s;
-  	   -moz-animation: fadein 10s;
-  	        animation: fadein 10s;
 
-  	-webkit-transition-duration: 0.5s;
-  	   -moz-transition-duration: 0.5s;
-  	        transition-duration: 0.5s;
+  	-webkit-transition-duration: 0.2s;
+  	   -moz-transition-duration: 0.2s;
+  	        transition-duration: 0.2s;
 }
 
 #backdrop-button:hover {
