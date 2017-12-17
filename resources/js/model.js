@@ -2,32 +2,6 @@
  * Model
  */
 
-const TYPE = {
-	ATOM: 0,
-	UNIT: 1
-}
-
-const atomTheme = [
-	'rgba(10, 130, 220'
-];
-
-const shadowTheme = [
-	'rgba(96, 54, 128',
-	'rgba(129, 86, 232',
-	'rgba(108, 108, 255',
-	'rgba(86, 122, 232'
-]
-
-const specterTheme = [
-	'rgba(26, 31, 62',
-	'rgba(69, 105, 142',
-	'rgba(214, 227, 242'
-]
-
-let ripples = [];
-const pitches = getPitches();
-const idToColor = new Map();
-
 class Circle {
 	constructor(x, y, r) {
 		this.x = x;
@@ -137,7 +111,7 @@ class Atom extends Unit {
 			} else if (hasCollided(this, units[i])) {
 				idToColor.set(this.id, stringOf(235));
 
-				this.osc.frequency.value = pitches[randomFrom(pitches)];
+				this.osc.frequency.value = collisionPitches[randomFrom(collisionPitches)];
 				this.osc.start();
 				this.env.triggerAttackRelease(0.8);
 

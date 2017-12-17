@@ -6,6 +6,7 @@
         <link rel="stylesheet" type="text/css" href="resources/css/style.css">
         <script src="vendors/Tone.min.js"></script>
         <script src="resources/js/utils.js"></script>
+        <script src="resources/js/data.js"></script>
         <script src="resources/js/model.js"></script>
     </head>
     <body>
@@ -15,13 +16,14 @@
                     <font>quarium</font>
                 </td>
                 <td>
-                    <button id="backdrop-button" onClick="changeBackdrop()">pass time</button>
+                    <button id="backdrop-button" onClick="passTime()">pass time</button>
                 </td>
             </tr>
             <tr>
                 <td><canvas id="canvas"></canvas></td>
             </tr>
         </table>
+        <div id="warning">Reload page in fullscreen mode.</div>
         <script src="resources/js/main.js"></script>
     </body>
 </html>

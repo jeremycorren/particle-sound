@@ -30,7 +30,7 @@ canvas {
 #top-bar {
 	background-color: #1b2e4f;
 	padding: 5px;
-	text-align: center;
+	text-align: left;
 
 	-webkit-animation: fadein 2s;
   	   -moz-animation: fadein 2s;
@@ -66,10 +66,28 @@ canvas {
   	        transition-duration: 0.2s;
 }
 
-#backdrop-button:hover {
+#backdrop-button:hover:enabled {
 	background-color: #1f64b7;
 }
 
+#backdrop-button:disabled {
+	opacity: 0.3;
+}
+
+#warning {
+	color: white;
+	font-family: "Tahoma";
+	position: fixed;
+  	top: 50%;
+  	left: 50%;
+
+	-moz-osx-font-smoothing: grayscale;
+	 -webkit-font-smoothing: antialiased;
+
+  	-webkit-transform: translate(-50%, -50%);
+       -moz-transform: translate(-50%, -50%);
+  	      	transform: translate(-50%, -50%);
+}
 
 @-webkit-keyframes fadein {
     from { opacity: 0; }

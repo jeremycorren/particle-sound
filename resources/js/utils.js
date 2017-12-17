@@ -30,11 +30,11 @@ function makeUnits(unit) {
 	return units;
 }
 
-function getPitches() {
+function getPitches(minOctave, maxOctave) {
 	const pitchClasses = ['A', 'B', 'C#', 'D', 'E', 'F#', 'G#'];
 	
 	let pitches = [];
-	for (let i = 3; i <= 5; i++) {
+	for (let i = minOctave; i <= maxOctave; i++) {
 		pitchClasses.forEach(pitchClass => pitches.push(pitchClass + i));
 	}
 	return pitches;
@@ -67,22 +67,30 @@ function valueOf(string) {
 	return parseInt(string.slice(5, 8));
 }
 
-let backgroundColors = [
-	'black',
-	'#b9c2e8',
-	'#492d51',
-	'#021a42',
-]
+let lastColor = '#021a42';
 
-let i = 0;
-function changeBackdrop() {
-	canvas.style.backgroundColor = backgroundColors[i];
-	document.body.style.backgroundColor = backgroundColors[i];
-	
-	i += 1;
-	if (i === backgroundColors.length) {
-		i = 0;
+function passTime() {
+	let color = backgroundColors[randomFrom(backgroundColors)];
+	while (lastColor == color) {
+		color = backgroundColors[randomFrom(backgroundColors)];
 	}
+
+	canvas.style.backgroundColor = color;
+	document.body.style.backgroundColor = color;
+
+	let chord = [];
+	for (let j = 0; j < 6; j++) {
+		chord.push(chordPitches[randomFrom(chordPitches)]);
+	}
+
+	polySynth.triggerAttackRelease(chord, 12);
+
+	document.getElementById("backdrop-button").disabled = true;
+    setTimeout(function() {
+    	document.getElementById("backdrop-button").disabled = false;
+    }, 7000);
+
+    lastColor = color;
 }
 
 function touchesBorder(axis, r, measure) {

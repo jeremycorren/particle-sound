@@ -8,18 +8,31 @@ let ctx = canvas.getContext("2d");
 ctx.canvas.width = window.innerWidth;
 ctx.canvas.height = window.innerHeight - topBar.offsetHeight;
 
+const idToColor = new Map();
+const collisionPitches = getPitches(3, 5);
+const chordPitches = getPitches(3, 4);
+
 let atoms, shadows, specters;
 function init() {
 	let atomDensity, shadowDensity, specterDensity;
-
-	if (ctx.canvas.width < 1300 && ctx.canvas.height < 700) {
-		atomDensity = 20;
-		shadowDensity = 15;
-		specterDensity = 7;
-	} else {
+	if (ctx.canvas.width > 1200 && ctx.canvas.height > 700) {
 		atomDensity = 35;
-		shadowDensity = 25;
+		shadowDensity = 28;
+		specterDensity = 14;
+
+		document.getElementById("warning").style.display = 'none';
+	} else if (ctx.canvas.width > 800 && ctx.canvas.height > 500) {
+		atomDensity = 25;
+		shadowDensity = 23;
 		specterDensity = 10;
+
+		document.getElementById("warning").style.display = 'none';
+	} else {
+		atomDensity = 0;
+		shadowDensity = 2;
+		specterDensity = 1;
+
+		document.getElementById("backdrop-button").style.display = 'none';
 	}
 
 	atoms = makeUnits(new UnitBuilder(TYPE.ATOM)
