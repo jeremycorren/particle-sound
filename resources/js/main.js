@@ -3,10 +3,9 @@
  */
 
 let canvas = document.getElementById('canvas');
-let topBar = document.getElementById('top-bar');
 let ctx = canvas.getContext("2d");
 ctx.canvas.width = window.innerWidth;
-ctx.canvas.height = window.innerHeight - topBar.offsetHeight;
+ctx.canvas.height = window.innerHeight;
 
 const idToColor = new Map();
 const collisionPitches = getPitches(3, 5);
@@ -22,17 +21,15 @@ function init() {
 
 		document.getElementById("warning").style.display = 'none';
 	} else if (ctx.canvas.width > 800 && ctx.canvas.height > 500) {
-		atomDensity = 25;
-		shadowDensity = 23;
-		specterDensity = 10;
+		atomDensity = 20;
+		shadowDensity = 17;
+		specterDensity = 8;
 
 		document.getElementById("warning").style.display = 'none';
 	} else {
 		atomDensity = 0;
 		shadowDensity = 2;
 		specterDensity = 1;
-
-		document.getElementById("backdrop-button").style.display = 'none';
 	}
 
 	atoms = makeUnits(new UnitBuilder(TYPE.ATOM)
@@ -64,9 +61,7 @@ function animate() {
 	requestAnimationFrame(animate);
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-	for (let i = 0; i < atoms.length; i++) {
-		atoms[i].update(atoms);
-	}
+	atoms.forEach(atom => atom.update(atoms));
 	shadows.forEach(shadow => shadow.update());
 	specters.forEach(specter => specter.update());
 	ripples.forEach(ripple => ripple.update());
@@ -74,3 +69,4 @@ function animate() {
 
 init();
 animate();
+setInterval(passTime, 15000);

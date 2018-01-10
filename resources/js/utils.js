@@ -67,13 +67,8 @@ function valueOf(string) {
 	return parseInt(string.slice(5, 8));
 }
 
-let lastColor = '#021a42';
-
 function passTime() {
 	let color = backgroundColors[randomFrom(backgroundColors)];
-	while (lastColor == color) {
-		color = backgroundColors[randomFrom(backgroundColors)];
-	}
 
 	canvas.style.backgroundColor = color;
 	document.body.style.backgroundColor = color;
@@ -82,15 +77,7 @@ function passTime() {
 	for (let j = 0; j < 6; j++) {
 		chord.push(chordPitches[randomFrom(chordPitches)]);
 	}
-
 	polySynth.triggerAttackRelease(chord, 12);
-
-	document.getElementById("backdrop-button").disabled = true;
-    setTimeout(function() {
-    	document.getElementById("backdrop-button").disabled = false;
-    }, 7000);
-
-    lastColor = color;
 }
 
 function touchesBorder(axis, r, measure) {
